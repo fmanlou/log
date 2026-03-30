@@ -11,14 +11,6 @@ class ILogService : public ILogger {
   virtual ~ILogService() = default;
 };
 
-class ILogServiceInjectMinix {
- protected:
-  void inject(const std::shared_ptr<ILogService>& service);
-
- protected:
-  std::shared_ptr<ILogService> logService;
-};
-
 extern std::shared_ptr<ILogService> logService;
 
 #define logTrace(...) \
