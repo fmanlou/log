@@ -40,10 +40,6 @@ LogLevel spdlogToLevel(spdlog::level::level_enum level) {
   }
 }
 
-/**
- * @Test
- * 给定文件绝对路径，返回文件名
- */
 std::string shortFileName(std::string_view file) {
   auto pos = file.find_last_of("/\\");
   if (pos != std::string_view::npos) {
@@ -60,11 +56,6 @@ Spdlogger::Spdlogger(const std::string& name) : ILogger(name) {
       "[%Y-%m-%d %H:%M:%S.%e] [%n %P] [thread %t] [%^%l%$] %v");
 }
 
-/**
- * @Test
- * 1. 确保spdlog资源被正确释放
- *
- */
 Spdlogger::~Spdlogger() {
   if (logger_) {
     logger_->flush();

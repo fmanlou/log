@@ -2,11 +2,9 @@ cmake_minimum_required(VERSION 3.20)
 
 project(log LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Vendored deps: optional library/fmt + library/spdlog (scripts/install_third_party.sh). Otherwise
-# use fmt/spdlog from CMAKE_PREFIX_PATH / system (e.g. -DCMAKE_PREFIX_PATH=...).
 set(LOG_LIBRARY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/library")
 if(IS_DIRECTORY "${LOG_LIBRARY_ROOT}")
   list(APPEND CMAKE_PREFIX_PATH "${LOG_LIBRARY_ROOT}/fmt"

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Build and install fmt + spdlog into project library/ (library/fmt, library/spdlog).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
