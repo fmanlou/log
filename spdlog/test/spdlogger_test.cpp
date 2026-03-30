@@ -1,4 +1,4 @@
-#include "src/platform/log/spdlog/spdlogger.h"
+#include "spdlog/spdlogger.h"
 
 #include <gtest/gtest.h>
 

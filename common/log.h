@@ -6,8 +6,7 @@
 #include <string>
 #include <utility>
 
-#include "src/base/common/lifecycle.h"
-#include "src/platform/log/common/formatter.h"
+#include "common/lifecycle.h"
 
 enum class LogLevel { Off, Trace, Debug, Info, Warning, Error };
 

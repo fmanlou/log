@@ -1,3 +1,3 @@
-#include "src/platform/log/common/log.h"
+#include "common/log.h"
 
 ILogger::ILogger(const std::string& name) {}

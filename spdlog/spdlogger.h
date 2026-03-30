@@ -2,7 +2,7 @@
 
 #include <spdlog/spdlog.h>
 
-#include "src/platform/log/common/log.h"
+#include "common/log.h"
 
 spdlog::level::level_enum levelToSpdlog(LogLevel level);
 

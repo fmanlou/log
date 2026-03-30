@@ -1,6 +1,6 @@
-#include "src/platform/log/common/logservice.h"
+#include "common/logservice.h"
 
-#include "src/platform/log/spdlog/spdlogger.h"
+#include "spdlog/spdlogger.h"
 
 LogService::LogService(const std::string& name) : ILogService(name) {
   logger_ = std::make_shared<Spdlogger>(name);

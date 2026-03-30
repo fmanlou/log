@@ -1,4 +1,4 @@
-#include "src/platform/log/common/ilogservice.h"
+#include "common/ilogservice.h"
 
 ILogService::ILogService(const std::string& name) : ILogger(name) {}
 
