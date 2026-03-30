@@ -16,8 +16,6 @@ class Spdlogger : public ILogger {
 
   ~Spdlogger() override;
 
-  void dispose() override;
-
   LogLevel getLevel() const override;
 
   void setLevel(LogLevel level) override;

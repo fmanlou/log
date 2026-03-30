@@ -8,8 +8,6 @@ class LogService : public ILogService {
  public:
   LogService(const std::string& name);
 
-  void dispose() override;
-
   LogLevel getLevel() const override;
 
   void setLevel(LogLevel level) override;

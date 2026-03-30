@@ -67,15 +67,8 @@ Spdlogger::Spdlogger(const std::string& name) : ILogger(name) {
  */
 Spdlogger::~Spdlogger() {
   if (logger_) {
-    spdlog::drop(logger_->name());
-  }
-}
-
-void Spdlogger::dispose() {
-  if (logger_) {
     logger_->flush();
     spdlog::drop(logger_->name());
-    logger_.reset();
   }
 }
 

@@ -6,13 +6,6 @@ LogService::LogService(const std::string& name) : ILogService(name) {
   logger_ = std::make_shared<Spdlogger>(name);
 }
 
-void LogService::dispose() {
-  if (logger_) {
-    logger_->dispose();
-    logger_.reset();
-  }
-}
-
 LogLevel LogService::getLevel() const {
   if (!logger_) return LogLevel::Off;
 

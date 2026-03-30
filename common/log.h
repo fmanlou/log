@@ -14,8 +14,6 @@ class ILogger {
 
   virtual ~ILogger() = default;
 
-  virtual void dispose() {}
-
   virtual LogLevel getLevel() const = 0;
 
   virtual void setLevel(LogLevel level) = 0;

@@ -29,9 +29,3 @@ TEST(Spdlogger, LogMessage) {
   spdlLogger.reset();
   ASSERT_EQ(spdlog::get("TestLogger"), nullptr);
 }
-
-TEST(Spdlogger, Dispose) {
-  auto spdlLogger = std::make_shared<Spdlogger>("DisposeLogger");
-  spdlLogger->dispose();
-  ASSERT_EQ(spdlog::get("DisposeLogger"), nullptr);
-}
