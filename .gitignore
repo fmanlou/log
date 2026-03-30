@@ -1,2 +1,4 @@
 build/
 .cache/
+library/
+.third_party_build/

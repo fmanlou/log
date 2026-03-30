@@ -5,26 +5,21 @@ project(log LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Vendored deps: optional library/fmt + library/spdlog (scripts/install_third_party.sh). Otherwise
+# use fmt/spdlog from CMAKE_PREFIX_PATH / system (e.g. -DCMAKE_PREFIX_PATH=...).
+set(LOG_LIBRARY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/library")
+if(IS_DIRECTORY "${LOG_LIBRARY_ROOT}")
+  list(APPEND CMAKE_PREFIX_PATH "${LOG_LIBRARY_ROOT}/fmt"
+       "${LOG_LIBRARY_ROOT}/spdlog")
+endif()
+
+find_package(fmt CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+
 unset(TARGET_NAME)
 unset(SRCS)
 
 set(TARGET_NAME log)
-
-include(FetchContent)
-FetchContent_Declare(
-  fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG 10.2.1)
-FetchContent_MakeAvailable(fmt)
-
-FetchContent_Declare(
-  spdlog
-  GIT_REPOSITORY https://github.com/gabime/spdlog.git
-  GIT_TAG v1.14.1)
-set(SPDLOG_BUILD_EXAMPLE OFF CACHE BOOL "" FORCE)
-set(SPDLOG_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(spdlog)
 
 aux_source_directory(. SRCS)
 aux_source_directory(common SRCS)
