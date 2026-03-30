@@ -16,15 +16,15 @@ find_package(spdlog CONFIG REQUIRED)
 
 set(TARGET_NAME log)
 
-aux_source_directory(. SRCS)
-aux_source_directory(common SRCS)
-aux_source_directory(spdlog SRCS)
+set(LOG_SRC_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/log")
+aux_source_directory("${LOG_SRC_ROOT}/common" SRCS)
+aux_source_directory("${LOG_SRC_ROOT}/spdlog" SRCS)
 
 add_library(${TARGET_NAME} ${SRCS})
 
 target_include_directories(
   ${TARGET_NAME}
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  PUBLIC $<BUILD_INTERFACE:${LOG_SRC_ROOT}>
          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(${TARGET_NAME} PUBLIC fmt::fmt spdlog::spdlog)
@@ -34,5 +34,5 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake")
 option(LOG_BUILD_TESTS "Build log unit tests" ON)
 if(LOG_BUILD_TESTS)
   enable_testing()
-  add_subdirectory(spdlog/test)
+  add_subdirectory(log/spdlog/test)
 endif()
