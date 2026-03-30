@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(log LANGUAGES CXX)
+project(log VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -22,9 +22,14 @@ aux_source_directory(spdlog SRCS)
 
 add_library(${TARGET_NAME} ${SRCS})
 
-target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(
+  ${TARGET_NAME}
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(${TARGET_NAME} PUBLIC fmt::fmt spdlog::spdlog)
+
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake")
 
 option(LOG_BUILD_TESTS "Build log unit tests" ON)
 if(LOG_BUILD_TESTS)
