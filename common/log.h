@@ -6,15 +6,15 @@
 #include <string>
 #include <utility>
 
-#include "common/lifecycle.h"
-
 enum class LogLevel { Off, Trace, Debug, Info, Warning, Error };
 
-class ILogger : public IDisposable {
+class ILogger {
  public:
   ILogger(const std::string& name);
 
   virtual ~ILogger() = default;
+
+  virtual void dispose() {}
 
   virtual LogLevel getLevel() const = 0;
 
