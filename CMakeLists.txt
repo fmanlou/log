@@ -3,34 +3,29 @@ cmake_minimum_required(VERSION 3.20)
 project(log VERSION 1.0.0 LANGUAGES CXX)
 
 include(GNUInstallDirs)
-set(LOG_INSTALL_PREFIX "${CMAKE_INSTALL_INCLUDEDIR}/log")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(LOG_LIBRARY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/library")
-if(IS_DIRECTORY "${LOG_LIBRARY_ROOT}")
-  list(APPEND CMAKE_PREFIX_PATH "${LOG_LIBRARY_ROOT}/fmt"
-       "${LOG_LIBRARY_ROOT}/spdlog")
+if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/library")
+  list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/library/fmt"
+       "${CMAKE_CURRENT_SOURCE_DIR}/library/spdlog")
 endif()
 
 find_package(fmt CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-set(TARGET_NAME log)
+aux_source_directory("${CMAKE_CURRENT_SOURCE_DIR}/log/common" SRCS)
+aux_source_directory("${CMAKE_CURRENT_SOURCE_DIR}/log/spdlog" SRCS)
 
-set(LOG_SRC_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/log")
-aux_source_directory("${LOG_SRC_ROOT}/common" SRCS)
-aux_source_directory("${LOG_SRC_ROOT}/spdlog" SRCS)
-
-add_library(${TARGET_NAME} ${SRCS})
+add_library(log ${SRCS})
 
 target_include_directories(
-  ${TARGET_NAME}
+  log
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
-target_link_libraries(${TARGET_NAME} PUBLIC fmt::fmt spdlog::spdlog)
+target_link_libraries(log PUBLIC fmt::fmt spdlog::spdlog)
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake")
 
