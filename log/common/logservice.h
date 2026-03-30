@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "common/ilogservice.h"
+#include "log/common/ilogservice.h"
 
 class LogService : public ILogService {
  public:

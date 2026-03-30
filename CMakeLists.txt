@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.20)
 
 project(log VERSION 1.0.0 LANGUAGES CXX)
 
+include(GNUInstallDirs)
+set(LOG_INSTALL_PREFIX "${CMAKE_INSTALL_INCLUDEDIR}/log")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -24,7 +27,7 @@ add_library(${TARGET_NAME} ${SRCS})
 
 target_include_directories(
   ${TARGET_NAME}
-  PUBLIC $<BUILD_INTERFACE:${LOG_SRC_ROOT}>
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(${TARGET_NAME} PUBLIC fmt::fmt spdlog::spdlog)
