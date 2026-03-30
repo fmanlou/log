@@ -14,9 +14,6 @@ endif()
 find_package(fmt CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-unset(TARGET_NAME)
-unset(SRCS)
-
 set(TARGET_NAME log)
 
 aux_source_directory(. SRCS)
