@@ -4,11 +4,9 @@
 #include "log/common/logservice.h"
 
 int main() {
-  getLogService() = std::make_shared<LogService>("log_demo");
-  getLogService()->setLevel(LogLevel::Info);
+  std::shared_ptr<logging::ILogService> logService =
+      std::make_shared<logging::LogService>("log_demo");
+  logService->setLevel(logging::LogLevel::Info);
   logInfo("macro: {}", "ok");
-  getLogService()->info("direct: {}", "ok");
-  getLogService()->flush();
-  getLogService().reset();
   return 0;
 }

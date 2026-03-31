@@ -2,6 +2,8 @@
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+namespace logging {
+
 spdlog::level::level_enum levelToSpdlog(LogLevel level) {
   switch (level) {
     case LogLevel::Trace:
@@ -86,3 +88,5 @@ std::string Spdlogger::format(std::string_view file, int line,
                               std::string_view func, std::string&& msg) const {
   return fmt::format("[{}:{}] {}", shortFileName(file), line, msg);
 }
+
+}  // namespace logging

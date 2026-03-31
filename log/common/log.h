@@ -2,9 +2,10 @@
 
 #include <fmt/format.h>
 
-#include <cstdarg>
 #include <string>
 #include <utility>
+
+namespace logging {
 
 enum class LogLevel { Off, Trace, Debug, Info, Warning, Error };
 
@@ -96,3 +97,5 @@ class ILogger {
 
   virtual void flush() = 0;
 };
+
+}  // namespace logging

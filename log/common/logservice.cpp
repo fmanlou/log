@@ -2,6 +2,8 @@
 
 #include "log/spdlog/spdlogger.h"
 
+namespace logging {
+
 LogService::LogService(const std::string& name) : ILogService(name) {
   logger_ = std::make_shared<Spdlogger>(name);
 }
@@ -49,3 +51,5 @@ void NullLogService::log(LogLevel level, std::string_view file, int line,
                          std::string_view func, std::string&& msg) {}
 
 void NullLogService::flush() {}
+
+}  // namespace logging

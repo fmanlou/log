@@ -4,12 +4,16 @@
 
 #include "log/common/log.h"
 
+namespace logging {
+
 class ILogService : public ILogger {
  public:
   ILogService(const std::string& name);
 
   virtual ~ILogService() = default;
 };
+
+}  // namespace logging
 
 #define logTrace(...) \
   if (logService) logService->trace2(__FILE__, __LINE__, __func__, __VA_ARGS__)

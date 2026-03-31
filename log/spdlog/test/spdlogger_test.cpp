@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+using namespace logging;
+
 TEST(Spdlogger, ShortFileName) {
   ASSERT_EQ(shortFileName("/path/to/file.cpp"), "file.cpp");
   ASSERT_EQ(shortFileName("C:\\path\\to\\file.cpp"), "file.cpp");

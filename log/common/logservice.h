@@ -4,6 +4,8 @@
 
 #include "log/common/ilogservice.h"
 
+namespace logging {
+
 class LogService : public ILogService {
  public:
   LogService(const std::string& name);
@@ -38,3 +40,5 @@ class NullLogService : public ILogService {
 
   void flush() override;
 };
+
+}  // namespace logging

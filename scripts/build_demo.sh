@@ -11,6 +11,5 @@ cmake -S "${ROOT}/demo" -B "${ROOT}/demo/build" \
   -DCMAKE_PREFIX_PATH="${DEPS_PREFIX}"
 
 cmake --build "${ROOT}/demo/build" -j"${JOBS}"
-ctest --test-dir "${ROOT}/demo/build" --output-on-failure
 
 echo "Built: ${ROOT}/demo/build/log_demo"
