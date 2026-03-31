@@ -7,6 +7,8 @@ include(GNUInstallDirs)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(LOG_BUILD_TESTS "Build log unit tests" ON)
+
 if(IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/library")
   list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/library/fmt"
        "${CMAKE_CURRENT_SOURCE_DIR}/library/spdlog")
@@ -29,7 +31,6 @@ target_link_libraries(log PUBLIC fmt::fmt spdlog::spdlog)
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake")
 
-option(LOG_BUILD_TESTS "Build log unit tests" ON)
 if(LOG_BUILD_TESTS)
   enable_testing()
   add_subdirectory(log/spdlog/test)

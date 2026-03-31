@@ -47,7 +47,7 @@ class ILogger {
   void log(LogLevel level, std::string_view fmt, Args&&... args) {
     if (level < getLevel()) return;
 
-    log(fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...));
+    log(level, fmt::format(fmt::runtime(fmt), std::forward<Args>(args)...));
   }
 
   template <typename... Args>

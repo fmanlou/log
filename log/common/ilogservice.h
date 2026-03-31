@@ -11,8 +11,6 @@ class ILogService : public ILogger {
   virtual ~ILogService() = default;
 };
 
-extern std::shared_ptr<ILogService> logService;
-
 #define logTrace(...) \
   if (logService) logService->trace2(__FILE__, __LINE__, __func__, __VA_ARGS__)
 
