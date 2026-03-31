@@ -17,10 +17,8 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/log/common/"
         FILES_MATCHING
         PATTERN "*.h")
 
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/log/spdlog/"
-        DESTINATION "${LOG_INSTALL_PREFIX}/spdlog"
-        FILES_MATCHING
-        PATTERN "*.h")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/log/spdlog/spdlogger.h"
+        DESTINATION "${LOG_INSTALL_PREFIX}/spdlog")
 
 install(
   EXPORT logTargets

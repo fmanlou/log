@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 LIBRARY="${ROOT}/library"
 BUILD_ROOT="${ROOT}/.third_party_build"
 
@@ -11,35 +11,35 @@ SPDLOG_REF="v1.14.1"
 FMT_REPO="https://github.com/fmtlib/fmt.git"
 SPDLOG_REPO="https://github.com/gabime/spdlog.git"
 
-jobs="${JOBS:-$(nproc 2>/dev/null || echo 4)}"
+jobs="${JOBS:-$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}"
 
 cmake_install() {
-  local src="$1"
-  local build="$2"
+  _src="$1"
+  _build="$2"
   shift 2
-  cmake -S "${src}" -B "${build}" "$@"
-  cmake --build "${build}" -j"${jobs}"
-  cmake --install "${build}"
+  cmake -S "$_src" -B "$_build" "$@"
+  cmake --build "$_build" -j"$jobs"
+  cmake --install "$_build"
 }
 
 install_fmt() {
-  local src="${BUILD_ROOT}/fmt"
-  local build="${BUILD_ROOT}/fmt-build"
-  rm -rf "${src}" "${build}"
-  mkdir -p "${BUILD_ROOT}"
-  git clone --depth 1 --branch "${FMT_REF}" "${FMT_REPO}" "${src}"
-  cmake_install "${src}" "${build}" \
+  _src="${BUILD_ROOT}/fmt"
+  _build="${BUILD_ROOT}/fmt-build"
+  rm -rf "$_src" "$_build"
+  mkdir -p "$BUILD_ROOT"
+  git clone --depth 1 --branch "$FMT_REF" "$FMT_REPO" "$_src"
+  cmake_install "$_src" "$_build" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX="${LIBRARY}/fmt" \
     -DFMT_TEST=OFF
 }
 
 install_spdlog() {
-  local src="${BUILD_ROOT}/spdlog"
-  local build="${BUILD_ROOT}/spdlog-build"
-  rm -rf "${src}" "${build}"
-  git clone --depth 1 --branch "${SPDLOG_REF}" "${SPDLOG_REPO}" "${src}"
-  cmake_install "${src}" "${build}" \
+  _src="${BUILD_ROOT}/spdlog"
+  _build="${BUILD_ROOT}/spdlog-build"
+  rm -rf "$_src" "$_build"
+  git clone --depth 1 --branch "$SPDLOG_REF" "$SPDLOG_REPO" "$_src"
+  cmake_install "$_src" "$_build" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX="${LIBRARY}/spdlog" \
     -DCMAKE_PREFIX_PATH="${LIBRARY}/fmt" \
