@@ -24,7 +24,7 @@ class ILogService : public ILogger {
 #define logInfo(...) \
   if (logService) logService->info2(__FILE__, __LINE__, __func__, __VA_ARGS__)
 
-#define logWarning(...) \
+#define logWarn(...) \
   if (logService) logService->warn2(__FILE__, __LINE__, __func__, __VA_ARGS__)
 
 #define logError(...) \
