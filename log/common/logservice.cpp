@@ -26,13 +26,6 @@ void LogService::log(LogLevel level, std::string&& msg) {
   }
 }
 
-void LogService::log(LogLevel level, std::string_view file, int line,
-                     std::string_view func, std::string&& msg) {
-  if (logger_) {
-    logger_->log(level, file, line, func, std::move(msg));
-  }
-}
-
 void LogService::flush() {
   if (logger_) {
     logger_->flush();

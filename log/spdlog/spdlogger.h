@@ -10,8 +10,6 @@ spdlog::level::level_enum levelToSpdlog(LogLevel level);
 
 LogLevel spdlogToLevel(spdlog::level::level_enum level);
 
-std::string shortFileName(std::string_view file);
-
 class Spdlogger : public ILogger {
  public:
   Spdlogger(const std::string& name);
@@ -24,14 +22,7 @@ class Spdlogger : public ILogger {
 
   void log(LogLevel level, std::string&& msg) override;
 
-  void log(LogLevel level, std::string_view file, int line,
-           std::string_view func, std::string&& msg) override;
-
   void flush() override;
-
- private:
-  std::string format(std::string_view file, int line, std::string_view func,
-                     std::string&& msg) const;
 
  private:
   spdlog::level::level_enum level_{spdlog::level::info};

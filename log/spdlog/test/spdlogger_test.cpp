@@ -4,12 +4,6 @@
 
 using namespace logging;
 
-TEST(Spdlogger, ShortFileName) {
-  ASSERT_EQ(shortFileName("/path/to/file.cpp"), "file.cpp");
-  ASSERT_EQ(shortFileName("C:\\path\\to\\file.cpp"), "file.cpp");
-  ASSERT_EQ(shortFileName("file.cpp"), "file.cpp");
-}
-
 TEST(Spdlogger, LogLevelConversion) {
   ASSERT_EQ(levelToSpdlog(LogLevel::Trace), spdlog::level::trace);
   ASSERT_EQ(levelToSpdlog(LogLevel::Debug), spdlog::level::debug);

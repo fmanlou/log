@@ -42,14 +42,6 @@ LogLevel spdlogToLevel(spdlog::level::level_enum level) {
   }
 }
 
-std::string shortFileName(std::string_view file) {
-  auto pos = file.find_last_of("/\\");
-  if (pos != std::string_view::npos) {
-    return std::string(file.substr(pos + 1));
-  }
-  return std::string(file);
-}
-
 Spdlogger::Spdlogger(const std::string& name) : ILogger(name) {
   logger_ = spdlog::stdout_color_mt(name);
 
@@ -76,17 +68,6 @@ void Spdlogger::log(LogLevel level, std::string&& msg) {
   logger_->log(levelToSpdlog(level), msg);
 }
 
-void Spdlogger::log(LogLevel level, std::string_view file, int line,
-                    std::string_view func, std::string&& msg) {
-  auto formattedMsg = format(file, line, func, std::move(msg));
-  log(level, std::move(formattedMsg));
-}
-
 void Spdlogger::flush() { logger_->flush(); }
-
-std::string Spdlogger::format(std::string_view file, int line,
-                              std::string_view func, std::string&& msg) const {
-  return fmt::format("[{}:{}] {}", shortFileName(file), line, msg);
-}
 
 }  // namespace logging

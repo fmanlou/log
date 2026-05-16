@@ -93,7 +93,7 @@ class ILogger {
   virtual void log(LogLevel level, std::string&& msg) = 0;
 
   virtual void log(LogLevel level, std::string_view file, int line,
-                   std::string_view func, std::string&& msg) = 0;
+                   std::string_view func, std::string&& msg);
 
   virtual void flush() = 0;
 };

@@ -16,9 +16,6 @@ class LogService : public ILogService {
 
   void log(LogLevel level, std::string&& msg) override;
 
-  void log(LogLevel level, std::string_view file, int line,
-           std::string_view function, std::string&& msg) override;
-
   void flush() override;
 
  private:
